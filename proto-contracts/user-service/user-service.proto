@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option go_package = "le-chat-app/proto/user-service;userserviceproto";
+
+package userserviceproto;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "proto-contracts/status/status.proto";
+
+
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUser(GetUserRequest) returns (GetUserResponse);
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+}
+
+message User {
+    int32 userId = 1;
+    string displayName = 2;
+    string password = 3;
+    string email = 4;
+    string name = 5;
+    google.protobuf.Timestamp createdAt = 6;
+    google.protobuf.Timestamp updatedAt = 7;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+
+message CreateUserResponse {
+    oneof result {
+        Status error = 1;
+        User user = 2;
+    }
+}
+
+message GetUserRequest {
+    string userId = 1;
+}
+
+message GetUserResponse {
+    oneof result {
+        Status error = 1;
+        User user = 2;
+    }
+}
+
+message UpdateUserRequest {
+    string userId = 1;
+    User user = 2;
+}
+
+message UpdateUserResponse {
+    oneof result {
+        Status error = 1;
+        User user = 2;
+    }
+}
+
+message DeleteUserRequest {
+    string userId = 1;
+}
+
+message DeleteUserResponse {
+    oneof result {
+        Status error = 1;
+        google.protobuf.Empty empty = 2;
+    }
+}
