@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-option go_package = "le-chat-app/proto/user-service;userserviceproto";
+option go_package = "user-service/;userservice";
 
 package userserviceproto;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
-import "proto-contracts/status/status.proto";
+import "status/status.proto";
 
 
 service UserService {
